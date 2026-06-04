@@ -357,6 +357,9 @@ function enviarModal() {
   fecharModal();
 }
 </script>
+
+<script>
+const perguntas = [
   { texto: "Se você parasse de trabalhar amanhã, por quanto tempo seu padrão de vida atual se manteria?", sub: "Considere poupança, investimentos e qualquer reserva disponível.", opcoes: [ { txt: "Menos de 3 meses — viveria de empréstimo ou família", pts: 0 }, { txt: "Entre 3 e 12 meses — teria alguma margem antes do colapso", pts: 1 }, { txt: "Entre 1 e 5 anos — tenho reservas mas não são permanentes", pts: 2 }, { txt: "Mais de 5 anos — o patrimônio atual sustentaria por um bom tempo", pts: 3 } ] },
   { texto: "Qual percentual da sua renda mensal vem de fontes que não dependem do seu trabalho ativo?", sub: "Aluguéis, dividendos, rendimentos de investimento, renda passiva de qualquer tipo.", opcoes: [ { txt: "0% — tudo vem do meu trabalho ou salário", pts: 0 }, { txt: "Menos de 20% — tenho alguma renda passiva, mas é marginal", pts: 1 }, { txt: "Entre 20% e 60% — parte relevante já vem de ativos", pts: 2 }, { txt: "Mais de 60% — a renda passiva é a base, não o complemento", pts: 3 } ] },
   { texto: "Você sabe quanto patrimônio líquido precisaria ter para nunca mais precisar trabalhar?", sub: "O número exato — não uma sensação de 'bastante'.", opcoes: [ { txt: "Não tenho ideia — nunca calculei", pts: 0 }, { txt: "Tenho uma noção vaga, mas sem cálculo real", pts: 1 }, { txt: "Já fiz uma estimativa, mas sem metodologia precisa", pts: 2 }, { txt: "Sei o número exato e tenho um plano para chegar lá", pts: 3 } ] },
