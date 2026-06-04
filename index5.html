@@ -31,7 +31,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--verde); color: var(
 .hero-dir::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 300px; height: 300px; border: 1px solid rgba(248,227,140,0.08); border-radius: 50%; }
 .hero-dir::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 180px; height: 180px; border: 1px solid rgba(248,227,140,0.12); border-radius: 50%; }
 .hero-numeros { position: relative; z-index: 1; text-align: center; }
-.hnum-titulo { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(248,227,140,0.5); font-family: 'DM Mono', monospace; margin-bottom: 32px; }
+.hnum-titulo { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(248,227,140,0.9); font-family: 'DM Mono', monospace; margin-bottom: 32px; }
 .hnum-item { margin-bottom: 28px; }
 .hnum-valor { font-family: 'Cormorant Garamond', serif; font-size: 2.6rem; font-weight: 700; color: var(--dourado); line-height: 1; }
 .hnum-desc { font-size: 0.75rem; color: rgba(255,255,255,0.75); margin-top: 4px; }
@@ -83,11 +83,11 @@ body { font-family: 'DM Sans', sans-serif; background: var(--verde); color: var(
 .res-wrap { background: var(--creme); min-height: 100vh; }
 .res-hero { background: var(--verde); padding: 56px 24px 48px; text-align: center; position: relative; overflow: hidden; }
 .res-hero::before { content: ''; position: absolute; bottom: -60px; right: -60px; width: 280px; height: 280px; border: 1px solid rgba(248,227,140,0.07); border-radius: 50%; }
-.res-label { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.2em; color: var(--dourado); opacity: 0.7; margin-bottom: 16px; position: relative; }
+.res-label { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.2em; color: var(--dourado); opacity: 1; margin-bottom: 16px; position: relative; }
 .res-titulo { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.7rem, 5vw, 2.6rem); color: var(--branco); line-height: 1.2; margin-bottom: 10px; position: relative; }
 .res-titulo em { color: var(--dourado); font-style: italic; }
 .res-perfil { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.18em; color: var(--dourado); opacity: 0.8; text-transform: uppercase; margin-bottom: 16px; position: relative; }
-.res-frase { font-size: 0.95rem; color: rgba(255,255,255,0.65); max-width: 500px; margin: 0 auto 32px; line-height: 1.7; position: relative; }
+.res-frase { font-size: 0.95rem; color: rgba(255,255,255,0.90); max-width: 500px; margin: 0 auto 32px; line-height: 1.7; position: relative; }
 
 /* ÍNDICE VIDA — novo bloco no resultado */
 .res-indice-bloco {
@@ -100,11 +100,11 @@ body { font-family: 'DM Sans', sans-serif; background: var(--verde); color: var(
 .res-indice-label { font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(248,227,140,0.6); margin-bottom: 10px; }
 .res-indice-linha { display: flex; align-items: baseline; gap: 10px; margin-bottom: 12px; }
 .res-indice-num { font-family: 'Cormorant Garamond', serif; font-size: 3.2rem; font-weight: 700; color: var(--dourado); line-height: 1; }
-.res-indice-de { font-size: 0.9rem; color: rgba(248,227,140,0.5); }
+.res-indice-de { font-size: 0.9rem; color: rgba(248,227,140,0.85); }
 .res-indice-status { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-style: italic; color: rgba(255,255,255,0.75); }
 .res-indice-barra-wrap { height: 4px; background: rgba(255,255,255,0.1); border-radius: 99px; overflow: hidden; margin-bottom: 6px; }
 .res-indice-barra-fill { height: 100%; background: linear-gradient(90deg, #8b2e2e 0%, #8a6e1c 45%, #d7ae4d 100%); border-radius: 99px; transition: width 1s cubic-bezier(.4,0,.2,1) 0.3s; }
-.res-indice-nota { font-size: 0.7rem; color: rgba(255,255,255,0.35); line-height: 1.4; margin-top: 4px; }
+.res-indice-nota { font-size: 0.82rem; color: rgba(255,255,255,0.85); line-height: 1.4; margin-top: 4px; }
 
 /* ESTÁGIOS */
 .estagios-wrap { max-width: 680px; margin: -20px auto 0; padding: 0 20px 40px; }
@@ -115,11 +115,11 @@ body { font-family: 'DM Sans', sans-serif; background: var(--verde); color: var(
 .estagio-corpo { flex: 1; }
 .estagio-nome { font-size: 0.88rem; font-weight: 700; color: var(--verde); margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
 .atual-badge { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; background: var(--verde); color: var(--dourado); padding: 2px 8px; border-radius: 3px; }
-.estagio-desc { font-size: 0.8rem; color: #666; line-height: 1.5; }
+.estagio-desc { font-size: 0.85rem; color: #1A3C2E; line-height: 1.5; }
 
 .acao-card { max-width: 680px; margin: 0 auto 16px; padding: 0 20px; }
 .acao-inner { background: var(--branco); border-radius: 10px; padding: 22px 24px; border: 1.5px solid #e5dfd3; }
-.acao-titulo { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #999; margin-bottom: 14px; }
+.acao-titulo { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #1A3C2E; margin-bottom: 14px; }
 .acao-item { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 10px; font-size: 0.85rem; color: var(--texto); line-height: 1.45; }
 .acao-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--verde-medio); flex-shrink: 0; margin-top: 6px; }
 
@@ -494,22 +494,15 @@ function revelar() {
     `;
   });
 
-  // Botão CTA → abre modal da landing page inline
-  document.getElementById('btn-sessao').onclick = function(e) {
-    e.preventDefault();
-    document.getElementById('modal-sessao').style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-    // Preenche dados do lead no modal
-    const nomeEl = document.getElementById('modal-nome-lead');
-    const indiceEl = document.getElementById('modal-indice-lead');
-    const fibEl = document.getElementById('modal-fib');
-    if(nomeEl) nomeEl.textContent = nome + ',';
-    if(indiceEl) indiceEl.textContent = indice;
-    if(fibEl) fibEl.textContent = `Índice VIDA ${indice}/100 — ${e_obj.nome}`;
-    document.getElementById('mf-nome').value = nome;
-    document.getElementById('mf-wpp').value = digits;
-  };
-  const e_obj = e;
+  // Botão CTA → landing page com parâmetros URL
+  const params = new URLSearchParams({
+    nome:    nome,
+    wpp:     digits,
+    indice:  indice,
+    estagio: idx + 1,
+    enome:   estagios[idx].nome
+  });
+  document.getElementById('btn-sessao').href = LANDING_URL + '?' + params.toString();
 
   // ── Envio para Google Sheets via Image GET (compatível com Apps Script) ──
   try {
