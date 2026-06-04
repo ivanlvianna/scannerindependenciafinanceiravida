@@ -1,0 +1,1682 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relatório VIDA Aposentadoria · Ivan Vianna CFP®</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --verde: #1A3C2E;
+  --verde-med: #2E5C46;
+  --dourado: #d7ae4d;
+  --dourado-claro: #f8e38c;
+  --creme: #f5f0e8;
+  --creme-escuro: #ede6d8;
+  --papel: #faf7f2;
+  --tinta: #1c1a16;
+  --tinta-med: #3a3730;
+  --tinta-clara: #5a5450;
+  --linha: rgba(28,26,22,0.10);
+  --vermelho: #8b2e2e;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Lato', sans-serif;
+  background: var(--creme);
+  color: var(--tinta);
+  min-height: 100vh;
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+/* ═══════════════════════════════════
+   TELA 1 — FORMULÁRIO
+═══════════════════════════════════ */
+
+#tela-form {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header do formulário */
+.form-header {
+  background: var(--verde);
+  position: relative;
+  overflow: hidden;
+}
+.form-header-grade {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(248,227,140,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(248,227,140,0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+.form-header-inner {
+  position: relative;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 52px 40px 48px;
+}
+.form-header-selo {
+  font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--dourado);
+  margin-bottom: 20px; display: flex; align-items: center; gap: 10px;
+}
+.form-header-selo::before { content: ''; display: block; width: 28px; height: 1px; background: var(--dourado); }
+.form-header-titulo {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.4rem; font-weight: 700; color: #fff;
+  line-height: 1.12; letter-spacing: -0.01em; margin-bottom: 14px;
+}
+.form-header-titulo em { color: var(--dourado-claro); font-style: italic; }
+.form-header-sub {
+  font-size: 1rem; font-weight: 300;
+  color: rgba(255,255,255,0.55); line-height: 1.65; max-width: 480px;
+}
+.form-header-tempo {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin-top: 20px; padding: 6px 14px;
+  border: 1px solid rgba(248,227,140,0.2);
+  border-radius: 99px;
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: rgba(248,227,140,0.6);
+}
+.form-header-tempo::before { content: '◷'; font-size: 0.9rem; }
+
+/* Progresso */
+.form-progresso {
+  background: var(--verde-med);
+  padding: 0;
+  border-bottom: 3px solid var(--dourado);
+}
+.form-progresso-inner {
+  max-width: 680px; margin: 0 auto;
+  padding: 0 40px;
+  display: flex; align-items: center; gap: 0;
+}
+.prog-etapa {
+  flex: 1; padding: 14px 0;
+  display: flex; align-items: center; gap: 8px;
+  font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: rgba(255,255,255,0.35);
+  transition: color 0.3s;
+  position: relative;
+}
+.prog-etapa.ativa { color: var(--dourado); }
+.prog-etapa.concluida { color: rgba(255,255,255,0.5); }
+.prog-etapa-num {
+  width: 22px; height: 22px; border-radius: 50%;
+  border: 1.5px solid currentColor;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.62rem; font-weight: 700; flex-shrink: 0;
+  transition: all 0.3s;
+}
+.prog-etapa.ativa .prog-etapa-num { background: var(--dourado); color: var(--verde); border-color: var(--dourado); }
+.prog-etapa.concluida .prog-etapa-num { background: rgba(255,255,255,0.15); }
+.prog-sep { width: 20px; height: 1px; background: rgba(255,255,255,0.15); flex-shrink: 0; }
+
+/* Corpo do formulário */
+.form-corpo {
+  flex: 1;
+  max-width: 680px; margin: 0 auto;
+  padding: 48px 40px 80px; width: 100%;
+}
+
+/* Seções (pilares) */
+.form-secao { display: none; }
+.form-secao.ativa { display: block; }
+
+.secao-pilar {
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 32px;
+}
+.secao-pilar-icone {
+  width: 48px; height: 48px; background: var(--verde);
+  border-radius: 3px; display: flex; align-items: center;
+  justify-content: center; font-size: 1.3rem; color: var(--dourado);
+  flex-shrink: 0;
+}
+.secao-pilar-nome {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem; font-weight: 600; color: var(--tinta);
+  line-height: 1.15; margin-bottom: 3px;
+}
+.secao-pilar-pergunta {
+  font-size: 0.85rem; font-weight: 300;
+  color: var(--tinta-clara); font-style: italic;
+}
+
+/* Perguntas */
+.pergunta { margin-bottom: 32px; }
+.pergunta-label {
+  font-size: 1rem; font-weight: 400; color: var(--tinta);
+  line-height: 1.45; margin-bottom: 16px; display: block;
+}
+.pergunta-label span {
+  font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--dourado);
+  display: block; margin-bottom: 6px;
+}
+
+/* Input monetário */
+.input-money {
+  width: 100%;
+  background: #fff; border: 1.5px solid var(--linha);
+  border-radius: 3px; padding: 14px 18px;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem; font-weight: 600; color: var(--tinta);
+  outline: none; transition: border-color 0.2s;
+}
+.input-money:focus { border-color: var(--verde); }
+.input-money::placeholder { color: rgba(28,26,22,0.2); font-family: 'Lato', sans-serif; font-size: 0.9rem; font-weight: 300; }
+
+/* Input número */
+.input-num {
+  width: 100%;
+  background: #fff; border: 1.5px solid var(--linha);
+  border-radius: 3px; padding: 14px 18px;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem; font-weight: 600; color: var(--tinta);
+  outline: none; transition: border-color 0.2s;
+}
+.input-num:focus { border-color: var(--verde); }
+.input-num::placeholder { color: rgba(28,26,22,0.2); font-family: 'Lato', sans-serif; font-size: 0.9rem; }
+
+/* Input text (nome) */
+.input-text {
+  width: 100%;
+  background: #fff; border: 1.5px solid var(--linha);
+  border-radius: 3px; padding: 14px 18px;
+  font-family: 'Lato', sans-serif;
+  font-size: 1rem; font-weight: 400; color: var(--tinta);
+  outline: none; transition: border-color 0.2s;
+}
+.input-text:focus { border-color: var(--verde); }
+.input-text::placeholder { color: rgba(28,26,22,0.25); }
+
+/* Opções de escolha */
+.opcoes { display: flex; flex-direction: column; gap: 10px; }
+.opcoes.horizontal { flex-direction: row; flex-wrap: wrap; }
+.opcao {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 18px;
+  background: #fff; border: 1.5px solid var(--linha);
+  border-radius: 3px; cursor: pointer;
+  transition: all 0.15s; user-select: none;
+}
+.opcao:hover { border-color: var(--verde-med); background: var(--papel); }
+.opcao.sel { border-color: var(--verde); background: var(--papel); }
+.opcao-radio {
+  width: 18px; height: 18px; border-radius: 50%;
+  border: 2px solid var(--linha); flex-shrink: 0;
+  transition: all 0.15s; position: relative;
+}
+.opcao.sel .opcao-radio {
+  border-color: var(--verde); background: var(--verde);
+}
+.opcao.sel .opcao-radio::after {
+  content: ''; position: absolute;
+  top: 50%; left: 50%; transform: translate(-50%,-50%);
+  width: 6px; height: 6px; border-radius: 50%; background: var(--dourado);
+}
+.opcao-texto { font-size: 0.95rem; color: var(--tinta); line-height: 1.35; }
+.opcao-sub { font-size: 0.78rem; color: var(--tinta-clara); display: block; margin-top: 2px; }
+
+/* Input duplo */
+.input-duplo { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+/* Navegação */
+.form-nav {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: 40px; padding-top: 28px;
+  border-top: 1px solid var(--linha);
+}
+.btn-voltar {
+  font-size: 0.82rem; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--tinta-clara);
+  background: none; border: none; cursor: pointer;
+  display: flex; align-items: center; gap: 6px;
+  transition: color 0.15s; padding: 0;
+}
+.btn-voltar:hover { color: var(--tinta); }
+.btn-avancar {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 16px 36px;
+  background: var(--verde); color: var(--dourado);
+  font-family: 'Lato', sans-serif;
+  font-size: 0.82rem; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; border: none;
+  border-radius: 3px; cursor: pointer;
+  transition: all 0.15s;
+}
+.btn-avancar:hover { background: var(--verde-med); transform: translateY(-1px); }
+.btn-avancar:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+/* Erro */
+.erro-msg {
+  font-size: 0.78rem; color: var(--vermelho);
+  margin-top: 8px; display: none;
+}
+.erro-msg.visivel { display: block; }
+
+/* ═══════════════════════════════════
+   TELA 2 — RELATÓRIO
+═══════════════════════════════════ */
+
+#tela-relatorio {
+  display: none;
+  min-height: 100vh;
+  background: var(--verde);
+  position: relative;
+  overflow: hidden;
+}
+#tela-relatorio.visivel { display: block; }
+
+/* Grade de fundo */
+.rel-grade {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background-image:
+    linear-gradient(rgba(248,227,140,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(248,227,140,0.03) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+.rel-inner {
+  position: relative; z-index: 1;
+  max-width: 760px; margin: 0 auto;
+  padding: 64px 48px 80px;
+}
+
+/* Cabeçalho do relatório */
+.rel-header {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  margin-bottom: 56px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid rgba(248,227,140,0.15);
+  opacity: 0; transform: translateY(16px);
+  animation: fadeUp 0.6s ease forwards;
+}
+.rel-header-esq {}
+.rel-doc-tipo {
+  font-size: 0.6rem; font-weight: 700; letter-spacing: 0.22em;
+  text-transform: uppercase; color: rgba(248,227,140,0.45);
+  margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
+}
+.rel-doc-tipo::before { content: ''; display: block; width: 24px; height: 1px; background: rgba(248,227,140,0.3); }
+.rel-doc-titulo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.9rem; font-weight: 700; color: #fff;
+  line-height: 1.15; letter-spacing: -0.01em;
+}
+.rel-doc-titulo em { color: var(--dourado-claro); font-style: italic; }
+.rel-doc-cliente {
+  font-size: 0.85rem; font-weight: 300;
+  color: rgba(255,255,255,0.45); margin-top: 8px;
+}
+.rel-doc-cliente strong { color: rgba(255,255,255,0.75); font-weight: 700; }
+.rel-header-dir { text-align: right; }
+.rel-doc-data {
+  font-size: 0.72rem; font-weight: 300;
+  color: rgba(255,255,255,0.3); line-height: 1.6;
+}
+
+/* ÍNDICE VIDA — o momento iPhone */
+.rel-indice {
+  margin-bottom: 48px;
+  opacity: 0; transform: translateY(20px);
+  animation: fadeUp 0.6s ease 0.15s forwards;
+}
+.rel-indice-label {
+  font-size: 0.6rem; font-weight: 700; letter-spacing: 0.2em;
+  text-transform: uppercase; color: rgba(248,227,140,0.4);
+  margin-bottom: 12px;
+}
+.rel-indice-numero {
+  font-family: 'Playfair Display', serif;
+  font-size: 7rem; font-weight: 700; color: var(--dourado);
+  line-height: 0.9; letter-spacing: -0.03em;
+  margin-bottom: 6px;
+}
+.rel-indice-de {
+  font-size: 1.1rem; font-weight: 300;
+  color: rgba(248,227,140,0.4); margin-left: 6px;
+}
+.rel-indice-status {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem; font-weight: 600; font-style: italic;
+  color: rgba(255,255,255,0.7); margin-bottom: 20px;
+  line-height: 1.3;
+}
+
+/* Barra do índice */
+.rel-barra-wrap {
+  height: 6px; background: rgba(255,255,255,0.08);
+  border-radius: 99px; overflow: hidden; max-width: 320px;
+  margin-bottom: 6px;
+}
+.rel-barra-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--vermelho) 0%, #8a6e1c 45%, var(--dourado) 100%);
+  border-radius: 99px; width: 0%;
+  transition: width 1.2s cubic-bezier(.4,0,.2,1) 0.5s;
+}
+.rel-barra-escala {
+  display: flex; justify-content: space-between; max-width: 320px;
+}
+.rel-barra-escala span {
+  font-size: 0.55rem; font-weight: 700; letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.2); text-transform: uppercase;
+}
+
+/* Pilares do índice */
+.rel-pilares {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 1px; background: rgba(248,227,140,0.08);
+  border: 1px solid rgba(248,227,140,0.08);
+  border-radius: 3px; overflow: hidden;
+  margin-top: 24px;
+}
+.rel-pilar {
+  background: rgba(255,255,255,0.03);
+  padding: 16px 20px;
+}
+.rel-pilar-nome {
+  font-size: 0.58rem; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: rgba(248,227,140,0.35);
+  margin-bottom: 6px;
+}
+.rel-pilar-score {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem; font-weight: 700; color: var(--dourado);
+  line-height: 1; margin-bottom: 4px;
+}
+.rel-pilar-barra-w { height: 3px; background: rgba(255,255,255,0.08); border-radius: 99px; overflow: hidden; }
+.rel-pilar-barra-f { height: 100%; border-radius: 99px; width: 0%; transition: width 1s ease 0.8s; }
+.p1 .rel-pilar-barra-f { background: var(--dourado); }
+.p2 .rel-pilar-barra-f { background: #7eb8a0; }
+.p3 .rel-pilar-barra-f { background: #b89fd4; }
+
+/* Separador */
+.rel-sep {
+  height: 1px; background: rgba(248,227,140,0.1);
+  margin: 40px 0;
+  opacity: 0; animation: fadeIn 0.4s ease 0.5s forwards;
+}
+
+/* RNI — o número que define tudo */
+.rel-rni {
+  margin-bottom: 40px;
+  opacity: 0; transform: translateY(16px);
+  animation: fadeUp 0.6s ease 0.3s forwards;
+}
+.rel-rni-label {
+  font-size: 0.6rem; font-weight: 700; letter-spacing: 0.2em;
+  text-transform: uppercase; color: rgba(248,227,140,0.4);
+  margin-bottom: 8px;
+}
+.rel-rni-titulo {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.95rem; font-weight: 400; color: rgba(255,255,255,0.5);
+  margin-bottom: 16px; font-style: italic;
+}
+
+.rel-numeros {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 0; border: 1px solid rgba(248,227,140,0.1);
+  border-radius: 3px; overflow: hidden;
+}
+.rel-num-bloco { padding: 20px 24px; }
+.rel-num-bloco:not(:last-child) { border-right: 1px solid rgba(248,227,140,0.08); }
+.rel-num-bloco.destaque { background: rgba(248,227,140,0.06); }
+.rel-num-bloco.gap-bloco { background: rgba(139,46,46,0.15); }
+.rel-num-etiqueta {
+  font-size: 0.58rem; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: rgba(248,227,140,0.35);
+  margin-bottom: 6px;
+}
+.rel-num-valor {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem; font-weight: 700; color: var(--dourado);
+  line-height: 1; margin-bottom: 3px;
+}
+.rel-num-valor.vermelho { color: #e88; }
+.rel-num-valor.verde { color: #7dc; }
+.rel-num-sub {
+  font-size: 0.68rem; color: rgba(255,255,255,0.25); line-height: 1.4;
+}
+
+/* Tempo estimado */
+.rel-tempo {
+  margin-top: 16px; padding: 14px 20px;
+  border: 1px solid rgba(248,227,140,0.1);
+  border-radius: 3px;
+  display: flex; align-items: center; gap: 16px;
+  background: rgba(255,255,255,0.03);
+}
+.rel-tempo-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem; font-weight: 700; color: var(--dourado);
+  line-height: 1; flex-shrink: 0;
+}
+.rel-tempo-desc {
+  font-size: 0.82rem; color: rgba(255,255,255,0.45); line-height: 1.5;
+}
+.rel-tempo-desc strong { color: rgba(255,255,255,0.7); font-weight: 700; }
+
+/* Riscos */
+.rel-riscos {
+  margin-bottom: 40px;
+  opacity: 0; transform: translateY(16px);
+  animation: fadeUp 0.6s ease 0.45s forwards;
+}
+.rel-riscos-titulo {
+  font-size: 0.6rem; font-weight: 700; letter-spacing: 0.2em;
+  text-transform: uppercase; color: rgba(248,227,140,0.4);
+  margin-bottom: 16px;
+}
+.rel-risco-lista { display: flex; flex-direction: column; gap: 10px; }
+.rel-risco {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 14px 18px;
+  background: rgba(139,46,46,0.1);
+  border: 1px solid rgba(139,46,46,0.2);
+  border-left: 3px solid var(--vermelho);
+  border-radius: 0 3px 3px 0;
+}
+.rel-risco-icone { font-size: 0.8rem; color: #e88; flex-shrink: 0; margin-top: 1px; }
+.rel-risco-texto { font-size: 0.88rem; color: rgba(255,255,255,0.7); line-height: 1.45; }
+
+/* Prioridades */
+.rel-prioridades {
+  margin-bottom: 40px;
+  opacity: 0; transform: translateY(16px);
+  animation: fadeUp 0.6s ease 0.55s forwards;
+}
+.rel-prioridades-titulo {
+  font-size: 0.6rem; font-weight: 700; letter-spacing: 0.2em;
+  text-transform: uppercase; color: rgba(248,227,140,0.4);
+  margin-bottom: 16px;
+}
+.rel-prio-lista { display: flex; flex-direction: column; gap: 10px; }
+.rel-prio {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 14px 18px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(248,227,140,0.08);
+  border-radius: 3px;
+}
+.rel-prio-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem; font-weight: 700; color: var(--dourado);
+  flex-shrink: 0; line-height: 1; min-width: 20px;
+}
+.rel-prio-texto { font-size: 0.88rem; color: rgba(255,255,255,0.7); line-height: 1.45; }
+
+/* Próximo passo — a oferta personalizada */
+.rel-proximo {
+  padding: 28px 32px;
+  background: rgba(248,227,140,0.08);
+  border: 1px solid rgba(248,227,140,0.2);
+  border-radius: 3px;
+  margin-bottom: 40px;
+  opacity: 0; transform: translateY(16px);
+  animation: fadeUp 0.6s ease 0.65s forwards;
+}
+.rel-proximo-label {
+  font-size: 0.6rem; font-weight: 700; letter-spacing: 0.2em;
+  text-transform: uppercase; color: rgba(248,227,140,0.5);
+  margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
+}
+.rel-proximo-label::before { content: ''; display: block; width: 16px; height: 1px; background: rgba(248,227,140,0.3); }
+.rel-proximo-titulo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem; font-weight: 600; color: #fff;
+  line-height: 1.4; margin-bottom: 12px;
+}
+.rel-proximo-titulo em { color: var(--dourado-claro); font-style: italic; }
+.rel-proximo-desc {
+  font-size: 0.85rem; font-weight: 300;
+  color: rgba(255,255,255,0.5); line-height: 1.65;
+  margin-bottom: 20px;
+}
+.rel-proximo-credito {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 16px;
+  background: rgba(215,174,77,0.12);
+  border: 1px solid rgba(215,174,77,0.25);
+  border-radius: 2px;
+  font-size: 0.78rem; font-weight: 700;
+  color: var(--dourado); letter-spacing: 0.04em;
+  margin-bottom: 20px;
+}
+.rel-proximo-credito::before { content: '✦'; font-size: 0.7rem; }
+
+.btn-wpp {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 14px 28px;
+  background: var(--dourado); color: var(--verde);
+  font-family: 'Lato', sans-serif;
+  font-size: 0.82rem; font-weight: 700; letter-spacing: 0.06em;
+  text-transform: uppercase; border-radius: 3px;
+  text-decoration: none; border: none; cursor: pointer;
+  transition: all 0.15s;
+}
+.btn-wpp:hover { background: var(--dourado-claro); transform: translateY(-1px); }
+.btn-wpp svg { width: 16px; height: 16px; fill: currentColor; flex-shrink: 0; }
+
+/* Assinatura */
+.rel-assinatura {
+  padding-top: 32px;
+  border-top: 1px solid rgba(248,227,140,0.1);
+  display: flex; justify-content: space-between; align-items: flex-end;
+  opacity: 0; animation: fadeIn 0.5s ease 0.9s forwards;
+}
+.rel-ass-nome {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem; font-weight: 600; color: rgba(255,255,255,0.7);
+  margin-bottom: 3px;
+}
+.rel-ass-titulo {
+  font-size: 0.7rem; color: rgba(255,255,255,0.3); line-height: 1.5;
+}
+.rel-ass-dir {
+  text-align: right;
+  font-size: 0.65rem; color: rgba(255,255,255,0.2); line-height: 1.6;
+}
+
+/* Botão imprimir */
+.btn-imprimir {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 20px; margin-top: 24px;
+  background: transparent;
+  border: 1px solid rgba(248,227,140,0.2);
+  color: rgba(248,227,140,0.5);
+  font-family: 'Lato', sans-serif;
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; border-radius: 2px;
+  cursor: pointer; transition: all 0.15s;
+}
+.btn-imprimir:hover { border-color: rgba(248,227,140,0.4); color: rgba(248,227,140,0.8); }
+
+/* ── GAP HERO — número domina a página ── */
+.rel-gap-hero {
+  margin-bottom: 0;
+  padding-bottom: 36px;
+  opacity: 0; transform: translateY(20px);
+  animation: fadeUp 0.7s ease 0.1s forwards;
+}
+.rel-gap-hero-eyebrow {
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--dourado);
+  margin-bottom: 8px; display: flex; align-items: center; gap: 10px;
+}
+.rel-gap-hero-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--dourado); }
+.rel-gap-hero-faltam {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem; font-weight: 400; font-style: italic;
+  color: rgba(255,255,255,0.75); margin-bottom: 2px; line-height: 1;
+}
+.rel-gap-hero-valor {
+  font-family: 'Playfair Display', serif;
+  font-size: 5.5rem; font-weight: 700; color: #e88;
+  line-height: 0.9; letter-spacing: -0.03em;
+  margin-bottom: 32px;
+}
+
+/* Três sub-números */
+.rel-gap-trios {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 0; border: 1px solid rgba(248,227,140,0.2);
+  border-radius: 3px; overflow: hidden;
+}
+.rel-gap-trio-item {
+  padding: 16px 20px;
+  border-right: 1px solid rgba(248,227,140,0.15);
+}
+.rel-gap-trio-item:last-child { border-right: none; }
+.rel-gap-trio-label {
+  font-size: 0.62rem; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--dourado);
+  margin-bottom: 5px;
+}
+.rel-gap-trio-valor {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem; font-weight: 700; color: #fff;
+  line-height: 1; margin-bottom: 3px;
+}
+.rel-gap-trio-sub {
+  font-size: 0.72rem; color: rgba(255,255,255,0.65); line-height: 1.35;
+}
+
+/* Cenário temporal — bloco que dói */
+.rel-cenario {
+  margin-top: 16px; margin-bottom: 40px;
+  padding: 18px 24px;
+  background: rgba(139,46,46,0.15);
+  border: 1px solid rgba(139,46,46,0.3);
+  border-left: 3px solid #e88;
+  border-radius: 0 3px 3px 0;
+  opacity: 0; transform: translateY(12px);
+  animation: fadeUp 0.55s ease 0.28s forwards;
+}
+.rel-cenario-label {
+  font-size: 0.62rem; font-weight: 700; letter-spacing: 0.16em;
+  text-transform: uppercase; color: #e88;
+  margin-bottom: 8px;
+}
+.rel-cenario-texto {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem; font-style: italic;
+  color: #fff; line-height: 1.6;
+}
+
+/* Índice VIDA — hierarquia reduzida */
+.rel-indice {
+  margin-bottom: 36px;
+  opacity: 0; transform: translateY(14px);
+  animation: fadeUp 0.6s ease 0.38s forwards;
+}
+.rel-indice-label {
+  font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--dourado);
+  margin-bottom: 12px;
+}
+.rel-indice-linha {
+  display: grid; grid-template-columns: auto 1fr;
+  gap: 28px; align-items: center; margin-bottom: 16px;
+}
+.rel-indice-numero {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.5rem; font-weight: 700; color: var(--dourado);
+  line-height: 0.9; letter-spacing: -0.02em;
+}
+.rel-indice-de {
+  font-size: 0.9rem; font-weight: 300;
+  color: rgba(248,227,140,0.6); margin-left: 3px;
+}
+.rel-indice-status {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.92rem; font-weight: 600; font-style: italic;
+  color: rgba(255,255,255,0.8); margin-top: 5px; line-height: 1.3;
+}
+.rel-indice-barra-col { display: flex; flex-direction: column; gap: 6px; }
+.rel-barra-wrap {
+  height: 5px; background: rgba(255,255,255,0.15);
+  border-radius: 99px; overflow: hidden;
+}
+.rel-barra-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--vermelho) 0%, #8a6e1c 45%, var(--dourado) 100%);
+  border-radius: 99px; width: 0%;
+  transition: width 1.2s cubic-bezier(.4,0,.2,1) 0.5s;
+}
+.rel-barra-escala { display: flex; justify-content: space-between; }
+.rel-barra-escala span {
+  font-size: 0.6rem; font-weight: 700; letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.55); text-transform: uppercase;
+}
+
+/* Pilares compactos */
+.rel-pilares-compact {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 0; border: 1px solid rgba(248,227,140,0.15);
+  border-radius: 3px; overflow: hidden;
+}
+.rel-pilar-c {
+  padding: 10px 16px;
+  border-right: 1px solid rgba(248,227,140,0.12);
+  display: flex; flex-direction: column; gap: 5px;
+}
+.rel-pilar-c:last-child { border-right: none; }
+.rel-pilar-c-nome {
+  font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: rgba(255,255,255,0.65);
+}
+.rel-pilar-c-score {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem; font-weight: 700; color: var(--dourado);
+  line-height: 1;
+}
+.rel-pilar-barra-w { height: 3px; background: rgba(255,255,255,0.15); border-radius: 99px; overflow: hidden; }
+.rel-pilar-barra-f { height: 100%; border-radius: 99px; width: 0%; transition: width 1s ease 0.8s; }
+.p1 .rel-pilar-barra-f { background: var(--dourado); }
+.p2 .rel-pilar-barra-f { background: #7eb8a0; }
+.p3 .rel-pilar-barra-f { background: #b89fd4; }
+
+/* ── PRÓXIMO PASSO — estrutura completa ── */
+.rel-proximo {
+  background: rgba(248,227,140,0.07);
+  border: 1px solid rgba(248,227,140,0.18);
+  border-radius: 4px; padding: 36px 40px;
+  margin-bottom: 40px;
+  opacity: 0; transform: translateY(16px);
+  animation: fadeUp 0.6s ease 0.65s forwards;
+}
+.rel-proximo-label {
+  font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--dourado);
+  margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
+}
+.rel-proximo-label::before { content: ''; display: block; width: 16px; height: 1px; background: var(--dourado); }
+.rel-proximo-pergunta {
+  font-size: 0.92rem; font-weight: 300;
+  color: rgba(255,255,255,0.75); margin-bottom: 10px; line-height: 1.6;
+}
+.rel-proximo-titulo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem; font-weight: 600; color: #fff;
+  line-height: 1.45; margin-bottom: 24px;
+}
+.rel-proximo-entregaveis {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 8px 24px; margin-bottom: 28px;
+}
+.rel-entregavel {
+  font-size: 0.9rem; color: #fff;
+  line-height: 1.4; padding: 2px 0;
+}
+.rel-proximo-credito-bloco {
+  display: flex; align-items: baseline; gap: 16px;
+  padding: 14px 18px; margin-bottom: 24px;
+  background: rgba(215,174,77,0.1);
+  border: 1px solid rgba(215,174,77,0.3);
+  border-radius: 2px;
+}
+.rel-proximo-credito-valor {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem; font-weight: 700; color: var(--dourado);
+  flex-shrink: 0; line-height: 1;
+}
+.rel-proximo-credito-desc {
+  font-size: 0.85rem; color: rgba(255,255,255,0.75); line-height: 1.5;
+}
+
+/* ── ASSINATURA ── */
+.rel-assinatura {
+  padding-top: 32px;
+  border-top: 1px solid rgba(248,227,140,0.15);
+  display: flex; justify-content: space-between; align-items: flex-end;
+  opacity: 0; animation: fadeIn 0.5s ease 0.9s forwards;
+}
+.rel-ass-nome {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem; font-weight: 600; color: #fff;
+  margin-bottom: 3px;
+}
+.rel-ass-titulo { font-size: 0.78rem; color: rgba(255,255,255,0.65); line-height: 1.6; }
+.rel-ass-dir { text-align: right; font-size: 0.75rem; color: rgba(255,255,255,0.55); line-height: 1.6; }
+
+/* ── RISCOS e PRIORIDADES ── */
+.rel-riscos {
+  margin-bottom: 32px;
+  opacity: 0; transform: translateY(16px);
+  animation: fadeUp 0.6s ease 0.45s forwards;
+}
+.rel-prioridades {
+  margin-bottom: 36px;
+  opacity: 0; transform: translateY(16px);
+  animation: fadeUp 0.6s ease 0.55s forwards;
+}
+.rel-riscos-titulo, .rel-prioridades-titulo {
+  font-size: 0.62rem; font-weight: 700; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--dourado);
+  margin-bottom: 12px;
+}
+.rel-risco-lista, .rel-prio-lista { display: flex; flex-direction: column; gap: 8px; }
+.rel-risco {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 12px 16px;
+  background: rgba(139,46,46,0.2);
+  border: 1px solid rgba(139,46,46,0.35);
+  border-left: 2px solid #e88;
+  border-radius: 0 3px 3px 0;
+}
+.rel-prio {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 12px 16px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(248,227,140,0.12);
+  border-radius: 3px;
+}
+.rel-risco-icone { font-size: 0.78rem; color: #e88; flex-shrink: 0; margin-top: 3px; }
+.rel-risco-texto { font-size: 0.92rem; color: #fff; line-height: 1.5; }
+.rel-prio-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem; font-weight: 700; color: var(--dourado);
+  flex-shrink: 0; line-height: 1; min-width: 18px;
+}
+.rel-prio-texto { font-size: 0.92rem; color: #fff; line-height: 1.5; }
+
+/* ── SEPARADOR ── */
+.rel-sep {
+  height: 1px; background: rgba(248,227,140,0.08);
+  margin: 36px 0;
+  opacity: 0; animation: fadeIn 0.4s ease 0.5s forwards;
+}
+
+/* ── MOBILE extras ── */
+@media (max-width: 640px) {
+  .rel-gap-hero-valor { font-size: 3.8rem; }
+  .rel-gap-trios { grid-template-columns: 1fr; }
+  .rel-gap-trio-item { border-right: none; border-bottom: 1px solid rgba(248,227,140,0.08); }
+  .rel-indice-linha { grid-template-columns: 1fr; gap: 12px; }
+  .rel-indice-numero { font-size: 3rem; }
+  .rel-pilares-compact { grid-template-columns: 1fr; }
+  .rel-pilar-c { border-right: none; border-bottom: 1px solid rgba(248,227,140,0.06); }
+  .rel-proximo-entregaveis { grid-template-columns: 1fr; }
+  .rel-proximo { padding: 24px; }
+  .rel-assinatura { flex-direction: column; gap: 16px; align-items: flex-start; }
+  .rel-ass-dir { text-align: left; }
+}
+
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+/* PRINT */
+@media print {
+  #tela-form { display: none !important; }
+  #tela-relatorio { display: block !important; }
+  .rel-grade { display: none; }
+  body { background: var(--verde); }
+  .btn-wpp, .btn-imprimir { display: none; }
+  * { animation: none !important; opacity: 1 !important; transform: none !important; }
+  .rel-barra-fill, .rel-pilar-barra-f { transition: none !important; }
+}
+
+/* MOBILE */
+@media (max-width: 640px) {
+  .form-header-inner, .form-corpo { padding-left: 24px; padding-right: 24px; }
+  .form-header-titulo { font-size: 1.9rem; }
+  .form-progresso-inner { padding: 0 24px; gap: 4px; }
+  .prog-etapa span { display: none; }
+  .input-duplo { grid-template-columns: 1fr; }
+  .rel-inner { padding: 40px 24px 56px; }
+  .rel-indice-numero { font-size: 5rem; }
+  .rel-numeros { grid-template-columns: 1fr; }
+  .rel-num-bloco:not(:last-child) { border-right: none; border-bottom: 1px solid rgba(248,227,140,0.08); }
+  .rel-pilares { grid-template-columns: 1fr; }
+  .rel-header { flex-direction: column; gap: 16px; }
+  .rel-header-dir { text-align: left; }
+  .rel-assinatura { flex-direction: column; gap: 16px; align-items: flex-start; }
+  .rel-ass-dir { text-align: left; }
+  .opcoes.horizontal { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════
+     TELA 1 — FORMULÁRIO
+═══════════════════════════════════ -->
+<div id="tela-form">
+
+  <div class="form-header">
+    <div class="form-header-grade"></div>
+    <div class="form-header-inner">
+      <div class="form-header-selo">Método VIDA · Sessão Diagnóstica</div>
+      <h1 class="form-header-titulo">Quanto custa<br>sua <em>liberdade</em>?</h1>
+      <p class="form-header-sub">Responda 12 perguntas. Em menos de 5 minutos você receberá seu Relatório VIDA — com o número real da sua independência financeira e o diagnóstico dos três pilares do seu patrimônio.</p>
+      <div class="form-header-tempo">menos de 5 minutos</div>
+    </div>
+  </div>
+
+  <div class="form-progresso">
+    <div class="form-progresso-inner">
+      <div class="prog-etapa ativa" id="prog-1">
+        <div class="prog-etapa-num">1</div>
+        <span>Capital</span>
+      </div>
+      <div class="prog-sep"></div>
+      <div class="prog-etapa" id="prog-2">
+        <div class="prog-etapa-num">2</div>
+        <span>Sustentação</span>
+      </div>
+      <div class="prog-sep"></div>
+      <div class="prog-etapa" id="prog-3">
+        <div class="prog-etapa-num">3</div>
+        <span>Legado</span>
+      </div>
+      <div class="prog-sep"></div>
+      <div class="prog-etapa" id="prog-4">
+        <div class="prog-etapa-num">4</div>
+        <span>Relatório</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-corpo">
+
+    <!-- SEÇÃO 0: NOME -->
+    <div class="form-secao ativa" id="sec-0">
+      <div class="secao-pilar">
+        <div class="secao-pilar-icone">✦</div>
+        <div>
+          <div class="secao-pilar-nome">Antes de começar</div>
+          <div class="secao-pilar-pergunta">Para personalizar seu relatório</div>
+        </div>
+      </div>
+      <div class="pergunta">
+        <label class="pergunta-label">
+          <span>Seu nome</span>
+          Como você gostaria de ser identificado no relatório?
+        </label>
+        <input type="text" class="input-text" id="campo-nome" placeholder="Ex: Ricardo Mendes">
+      </div>
+      <div class="form-nav">
+        <div></div>
+        <button class="btn-avancar" onclick="avancar(0)">
+          Começar diagnóstico →
+        </button>
+      </div>
+    </div>
+
+    <!-- SEÇÃO 1: CAPITAL -->
+    <div class="form-secao" id="sec-1">
+      <div class="secao-pilar">
+        <div class="secao-pilar-icone">◈</div>
+        <div>
+          <div class="secao-pilar-nome">Capital</div>
+          <div class="secao-pilar-pergunta">"Posso parar de trabalhar?"</div>
+        </div>
+      </div>
+
+      <div class="pergunta">
+        <label class="pergunta-label">
+          <span>Pergunta 1 de 12</span>
+          Qual o custo mensal que você pretende ter quando parar de trabalhar?
+        </label>
+        <input type="text" class="input-money" id="q1" placeholder="Ex: R$ 15.000,00" oninput="mascara(this)">
+        <div class="erro-msg" id="err-q1">Informe um valor para continuar.</div>
+      </div>
+
+      <div class="pergunta">
+        <label class="pergunta-label">
+          <span>Pergunta 2 de 12</span>
+          Qual o total do seu patrimônio financeiro hoje? (só o que está investido — não conte imóveis ou empresa)
+        </label>
+        <input type="text" class="input-money" id="q2" placeholder="Ex: R$ 800.000,00" oninput="mascara(this)">
+        <div class="erro-msg" id="err-q2">Informe um valor para continuar.</div>
+      </div>
+
+      <div class="pergunta">
+        <label class="pergunta-label">
+          <span>Perguntas 3 e 4 de 12</span>
+          Quanto você investe por mês e em quantos anos pretende atingir sua independência?
+        </label>
+        <div class="input-duplo">
+          <div>
+            <input type="text" class="input-money" id="q3" placeholder="Aporte mensal" oninput="mascara(this)">
+            <div class="erro-msg" id="err-q3">Informe o aporte mensal.</div>
+          </div>
+          <div>
+            <input type="number" class="input-num" id="q4" placeholder="Anos" min="1" max="40">
+            <div class="erro-msg" id="err-q4">Informe o horizonte em anos.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-nav">
+        <button class="btn-voltar" onclick="voltar(1)">← Voltar</button>
+        <button class="btn-avancar" onclick="avancar(1)">Próximo →</button>
+      </div>
+    </div>
+
+    <!-- SEÇÃO 2: SUSTENTAÇÃO -->
+    <div class="form-secao" id="sec-2">
+      <div class="secao-pilar">
+        <div class="secao-pilar-icone">⟁</div>
+        <div>
+          <div class="secao-pilar-nome">Sustentação</div>
+          <div class="secao-pilar-pergunta">"Meu dinheiro dura até o fim?"</div>
+        </div>
+      </div>
+
+      <div class="pergunta">
+        <label class="pergunta-label">
+          <span>Pergunta 5 de 12</span>
+          Você tem uma estratégia definida de como vai retirar dinheiro do patrimônio quando parar de trabalhar?
+        </label>
+        <div class="opcoes" id="q5">
+          <div class="opcao" onclick="selOpcao('q5',0,'Sim, tenho estratégia definida',70)">
+            <div class="opcao-radio"></div>
+            <div class="opcao-texto">Sim, tenho estratégia definida
+              <span class="opcao-sub">Sei como e quanto vou retirar mês a mês</span>
+            </div>
+          </div>
+          <div class="opcao" onclick="selOpcao('q5',1,'Tenho ideia geral, mas nada estruturado',35)">
+            <div class="opcao-radio"></div>
+            <div class="opcao-texto">Tenho ideia geral, mas nada estruturado
+              <span class="opcao-sub">Vou "viver dos juros", mas sem modelo formal</span>
+            </div>
+          </div>
+          <div class="opcao" onclick="selOpcao('q5',2,'Não tenho estratégia definida',0)">
+            <div class="opcao-radio"></div>
+            <div class="opcao-texto">Não tenho estratégia definida
+              <span class="opcao-sub">Nunca pensei nisso com profundidade</span>
+            </div>
+          </div>
+        </div>
+        <div class="erro-msg" id="err-q5">Selecione uma opção.</div>
+      </div>
+
+      <div class="pergunta">
+        <label class="pergunta-label">
+          <span>Pergunta 6 de 12</span>
+          Seu plano de saúde atual — o que acontece com ele quando você parar de trabalhar?
+        </label>
+        <div class="opcoes" id="q6">
+          <div class="opcao" onclick="selOpcao('q6',0,'Tenho plano individual próprio',80)">
+            <div class="opcao-radio"></div>
+            <div class="opcao-texto">Tenho plano individual próprio
+              <span class="opcao-sub">Não depende do emprego</span>
+            </div>
+          </div>
+          <div class="opcao" onclick="selOpcao('q6',1,'Tenho plano empresarial — sei que vou perder',20)">
+            <div class="opcao-radio"></div>
+            <div class="opcao-texto">Tenho plano empresarial — sei que vou perder
+              <span class="opcao-sub">Precisarei contratar um novo ao parar</span>
+            </div>
+          </div>
+          <div class="opcao" onclick="selOpcao('q6',2,'Tenho plano empresarial — não pensei nisso',0)">
+            <div class="opcao-radio"></div>
+            <div class="opcao-texto">Tenho plano empresarial — nunca pensei nisso
+              <span class="opcao-sub">Não planejei o que acontece na aposentadoria</span>
+            </div>
+          </div>
+          <div class="opcao" onclick="selOpcao('q6',3,'Não tenho plano de saúde',0)">
+            <div class="opcao-radio"></div>
+            <div class="opcao-texto">Não tenho plano de saúde</div>
+          </div>
+        </div>
+        <div class="erro-msg" id="err-q6">Selecione uma opção.</div>
+      </div>
+
+      <div class="pergunta">
+        <label class="pergunta-label">
+          <span>Pergunta 7 de 12</span>
+          Você já estimou quanto vai custar seu plano de saúde aos 65, 75 e 85 anos — considerando a inflação médica?
+        </label>
+        <div class="opcoes" id="q7">
+          <div class="opcao" onclick="selOpcao('q7',0,'Sim, tenho essa projeção',100)">
+            <div class="opcao-radio"></div>
+            <div class="opcao-texto">Sim, tenho essa projeção</div>
+          </div>
+          <div class="opcao" onclick="selOpcao('q7',1,'Não, mas sei que o custo cresce muito',30)">
+            <div class="opcao-radio"></div>
+            <div class="opcao-texto">Não, mas sei que o custo cresce muito</div>
+          </div>
+          <div class="opcao" onclick="selOpcao('q7',2,'Nunca pensei nisso',0)">
+            <div class="opcao-radio"></div>
+            <div class="opcao-texto">Nunca pensei nisso</div>
+          </div>
+        </div>
+        <div class="erro-msg" id="err-q7">Selecione uma opção.</div>
+      </div>
+
+      <div class="pergunta">
+        <label class="pergunta-label">
+          <span>Pergunta 8 de 12</span>
+          Você tem uma reserva financeira separada para emergências médicas e cuidados de longa duração?
+        </label>
+        <div class="opcoes" id="q8">
+          <div class="opcao" onclick="selOpcao('q8',0,'Sim, tenho reserva específica para isso',100)">
+            <div class="opcao-radio"></div>
+            <div class="opcao-texto">Sim, tenho reserva específica para isso</div>
+          </div>
+          <div class="opcao" onclick="selOpcao('q8',1,'Não especificamente, mas tenho reserva geral',40)">
+            <div class="opcao-radio"></div>
+            <div class="opcao-texto">Não especificamente, mas tenho reserva geral</div>
+          </div>
+          <div class="opcao" onclick="selOpcao('q8',2,'Não tenho reserva para isso',0)">
+            <div class="opcao-radio"></div>
+            <div class="opcao-texto">Não tenho reserva para isso</div>
+          </div>
+        </div>
+        <div class="erro-msg" id="err-q8">Selecione uma opção.</div>
+      </div>
+
+      <div class="form-nav">
+        <button class="btn-voltar" onclick="voltar(2)">← Voltar</button>
+        <button class="btn-avancar" onclick="avancar(2)">Próximo →</button>
+      </div>
+    </div>
+
+    <!-- SEÇÃO 3: LEGADO -->
+    <div class="form-secao" id="sec-3">
+      <div class="secao-pilar">
+        <div class="secao-pilar-icone">❖</div>
+        <div>
+          <div class="secao-pilar-nome">Legado</div>
+          <div class="secao-pilar-pergunta">"O patrimônio chega a quem deve chegar?"</div>
+        </div>
+      </div>
+
+      <div class="pergunta">
+        <label class="pergunta-label">
+          <span>Pergunta 9 de 12</span>
+          Você tem previdência privada (PGBL ou VGBL)?
+        </label>
+        <div class="opcoes" id="q9">
+          <div class="opcao" onclick="selOpcao('q9',0,'Sim, PGBL — declaro IR no modelo completo',100)">
+            <div class="opcao-radio"></div>
+            <div class="opcao-texto">Sim, PGBL — declaro IR no modelo completo</div>
+          </div>
+          <div class="opcao" onclick="selOpcao('q9',1,'Sim, VGBL',70)">
+            <div class="opcao-radio"></div>
+            <div class="opcao-texto">Sim, VGBL</div>
+          </div>
+          <div class="opcao" onclick="selOpcao('q9',2,'Sim, mas não sei qual é',30)">
+            <div class="opcao-radio"></div>
+            <div class="opcao-texto">Sim, mas não sei qual é
+              <span class="opcao-sub">Nunca revisou o produto</span>
+            </div>
+          </div>
+          <div class="opcao" onclick="selOpcao('q9',3,'Não tenho previdência privada',0)">
+            <div class="opcao-radio"></div>
+            <div class="opcao-texto">Não tenho previdência privada</div>
+          </div>
+        </div>
+        <div class="erro-msg" id="err-q9">Selecione uma opção.</div>
+      </div>
+
+      <div class="pergunta">
+        <label class="pergunta-label">
+          <span>Pergunta 10 de 12</span>
+          Você revisou as taxas e a tabela tributária da sua previdência nos últimos 2 anos?
+        </label>
+        <div class="opcoes" id="q10">
+          <div class="opcao" onclick="selOpcao('q10',0,'Sim, está adequada',100)">
+            <div class="opcao-radio"></div>
+            <div class="opcao-texto">Sim, está adequada</div>
+          </div>
+          <div class="opcao" onclick="selOpcao('q10',1,'Não revisei recentemente',20)">
+            <div class="opcao-radio"></div>
+            <div class="opcao-texto">Não revisei recentemente</div>
+          </div>
+          <div class="opcao" onclick="selOpcao('q10',2,'Não tenho previdência / não se aplica',50)">
+            <div class="opcao-radio"></div>
+            <div class="opcao-texto">Não tenho previdência / não se aplica</div>
+          </div>
+        </div>
+        <div class="erro-msg" id="err-q10">Selecione uma opção.</div>
+      </div>
+
+      <div class="pergunta">
+        <label class="pergunta-label">
+          <span>Pergunta 11 de 12</span>
+          Você tem testamento ou documento que define como seu patrimônio será distribuído?
+        </label>
+        <div class="opcoes" id="q11">
+          <div class="opcao" onclick="selOpcao('q11',0,'Sim, testamento atualizado',100)">
+            <div class="opcao-radio"></div>
+            <div class="opcao-texto">Sim, testamento atualizado</div>
+          </div>
+          <div class="opcao" onclick="selOpcao('q11',1,'Tenho, mas está desatualizado',40)">
+            <div class="opcao-radio"></div>
+            <div class="opcao-texto">Tenho, mas está desatualizado</div>
+          </div>
+          <div class="opcao" onclick="selOpcao('q11',2,'Não tenho testamento',0)">
+            <div class="opcao-radio"></div>
+            <div class="opcao-texto">Não tenho testamento</div>
+          </div>
+        </div>
+        <div class="erro-msg" id="err-q11">Selecione uma opção.</div>
+      </div>
+
+      <div class="pergunta">
+        <label class="pergunta-label">
+          <span>Pergunta 12 de 12</span>
+          Você tem holding patrimonial, doação com usufruto ou outra estrutura para reduzir o custo de transmissão do patrimônio?
+        </label>
+        <div class="opcoes" id="q12">
+          <div class="opcao" onclick="selOpcao('q12',0,'Sim, tenho estrutura definida',100)">
+            <div class="opcao-radio"></div>
+            <div class="opcao-texto">Sim, tenho estrutura definida</div>
+          </div>
+          <div class="opcao" onclick="selOpcao('q12',1,'Estou estudando / em processo',50)">
+            <div class="opcao-radio"></div>
+            <div class="opcao-texto">Estou estudando / em processo</div>
+          </div>
+          <div class="opcao" onclick="selOpcao('q12',2,'Não tenho e nunca pensei nisso',0)">
+            <div class="opcao-radio"></div>
+            <div class="opcao-texto">Não tenho e nunca pensei nisso</div>
+          </div>
+        </div>
+        <div class="erro-msg" id="err-q12">Selecione uma opção.</div>
+      </div>
+
+      <div class="form-nav">
+        <button class="btn-voltar" onclick="voltar(3)">← Voltar</button>
+        <button class="btn-avancar" onclick="gerarRelatorio()">Ver meu relatório →</button>
+      </div>
+    </div>
+
+  </div><!-- fim form-corpo -->
+</div><!-- fim tela-form -->
+
+
+<!-- ═══════════════════════════════════
+     TELA 2 — RELATÓRIO
+═══════════════════════════════════ -->
+<div id="tela-relatorio">
+  <div class="rel-grade"></div>
+  <div class="rel-inner">
+
+    <!-- Cabeçalho -->
+    <div class="rel-header">
+      <div class="rel-header-esq">
+        <div class="rel-doc-tipo">Relatório VIDA · Diagnóstico Patrimonial</div>
+        <div class="rel-doc-titulo">Diagnóstico VIDA<br><em>Aposentadoria</em></div>
+        <div class="rel-doc-cliente">Preparado para <strong id="rel-nome">—</strong></div>
+      </div>
+      <div class="rel-header-dir">
+        <div class="rel-doc-data" id="rel-data">—</div>
+      </div>
+    </div>
+
+    <!-- MANCHETE: O GAP domina a página -->
+    <div class="rel-gap-hero">
+      <div class="rel-gap-hero-eyebrow">Para comprar sua liberdade financeira</div>
+      <div class="rel-gap-hero-faltam">Faltam</div>
+      <div class="rel-gap-hero-valor" id="rel-gap-hero-valor">—</div>
+
+      <!-- Três sub-números abaixo do gap -->
+      <div class="rel-gap-trios">
+        <div class="rel-gap-trio-item">
+          <div class="rel-gap-trio-label">Você quer viver com</div>
+          <div class="rel-gap-trio-valor" id="rel-custo-mensal">—</div>
+          <div class="rel-gap-trio-sub">por mês na independência</div>
+        </div>
+        <div class="rel-gap-trio-item">
+          <div class="rel-gap-trio-label">Você precisa de</div>
+          <div class="rel-gap-trio-valor" id="rel-rni">—</div>
+          <div class="rel-gap-trio-sub">Reserva Necessária para Independência</div>
+        </div>
+        <div class="rel-gap-trio-item">
+          <div class="rel-gap-trio-label">Você possui hoje</div>
+          <div class="rel-gap-trio-valor" id="rel-patrim">—</div>
+          <div class="rel-gap-trio-sub">patrimônio financeiro investido</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cenário temporal — a data que dói -->
+    <div class="rel-cenario" id="rel-cenario-bloco">
+      <div class="rel-cenario-label">Cenário atual</div>
+      <div class="rel-cenario-texto" id="rel-previsao">—</div>
+    </div>
+
+    <div class="rel-sep"></div>
+
+    <!-- Índice VIDA — consequência, não manchete -->
+    <div class="rel-indice">
+      <div class="rel-indice-label">Índice VIDA de Independência</div>
+      <div class="rel-indice-linha">
+        <div>
+          <div class="rel-indice-numero">
+            <span id="rel-indice-num">—</span><span class="rel-indice-de">/100</span>
+          </div>
+          <div class="rel-indice-status" id="rel-indice-status">—</div>
+        </div>
+        <div class="rel-indice-barra-col">
+          <div class="rel-barra-wrap">
+            <div class="rel-barra-fill" id="rel-barra"></div>
+          </div>
+          <div class="rel-barra-escala">
+            <span>Crítico</span><span>Vulnerável</span><span>Base</span><span>Sólido</span>
+          </div>
+        </div>
+      </div>
+      <!-- Pilares compactos — suporte, não protagonistas -->
+      <div class="rel-pilares-compact">
+        <div class="rel-pilar-c p1">
+          <div class="rel-pilar-c-nome">Capital</div>
+          <div class="rel-pilar-c-score" id="rp1">—</div>
+          <div class="rel-pilar-barra-w"><div class="rel-pilar-barra-f" id="rpb1"></div></div>
+        </div>
+        <div class="rel-pilar-c p2">
+          <div class="rel-pilar-c-nome">Sustentação</div>
+          <div class="rel-pilar-c-score" id="rp2">—</div>
+          <div class="rel-pilar-barra-w"><div class="rel-pilar-barra-f" id="rpb2"></div></div>
+        </div>
+        <div class="rel-pilar-c p3">
+          <div class="rel-pilar-c-nome">Legado</div>
+          <div class="rel-pilar-c-score" id="rp3">—</div>
+          <div class="rel-pilar-barra-w"><div class="rel-pilar-barra-f" id="rpb3"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rel-sep"></div>
+
+    <!-- Riscos -->
+    <div class="rel-riscos">
+      <div class="rel-riscos-titulo">Principais riscos identificados</div>
+      <div class="rel-risco-lista" id="rel-riscos-lista">
+        <!-- gerado por JS -->
+      </div>
+    </div>
+
+    <!-- Prioridades -->
+    <div class="rel-prioridades">
+      <div class="rel-prioridades-titulo">Prioridades recomendadas</div>
+      <div class="rel-prio-lista" id="rel-prio-lista">
+        <!-- gerado por JS -->
+      </div>
+    </div>
+
+    <!-- Próximo passo — oferta completa orientada ao gap -->
+    <div class="rel-proximo">
+      <div class="rel-proximo-label">Próximo passo</div>
+      <div class="rel-proximo-pergunta">O Planejamento VIDA foi criado para responder uma única pergunta:</div>
+      <div class="rel-proximo-titulo" id="rel-proximo-titulo">—</div>
+      <div class="rel-proximo-entregaveis">
+        <div class="rel-entregavel">✓ Estratégia de acumulação e construção de capital</div>
+        <div class="rel-entregavel">✓ Estratégia de desacumulação personalizada</div>
+        <div class="rel-entregavel">✓ Estratégia previdenciária com análise de eficiência fiscal</div>
+        <div class="rel-entregavel">✓ Estratégia sucessória e estrutura de legado</div>
+        <div class="rel-entregavel">✓ Cronograma de implementação com prioridades</div>
+        <div class="rel-entregavel">✓ Revisões periódicas — Pulso VIDA</div>
+      </div>
+      <div class="rel-proximo-credito-bloco">
+        <div class="rel-proximo-credito-valor">R$ 797,00</div>
+        <div class="rel-proximo-credito-desc">Valor investido nesta sessão — creditado integralmente no Planejamento VIDA por 30 dias. Você não pagou pelo diagnóstico. Pagou um sinal.</div>
+      </div>
+      <a class="btn-wpp" id="btn-wpp" href="#" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.555 4.126 1.526 5.856L.057 23.882l6.186-1.622A11.937 11.937 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.045-1.393l-.361-.215-3.737.979 1.001-3.65-.236-.375A9.818 9.818 0 1112 21.818z"/></svg>
+        Conversar com Ivan Vianna
+      </a>
+    </div>
+
+    <!-- Assinatura -->
+    <div class="rel-assinatura">
+      <div>
+        <div class="rel-ass-nome">Ivan Vianna · CFP®</div>
+        <div class="rel-ass-titulo">Planejador financeiro · Arquiteto de patrimônio<br>CNPJ 56.099.913/0001-61 · ivanviannafinancas.com.br</div>
+      </div>
+      <div class="rel-ass-dir">
+        Relatório VIDA Aposentadoria<br>
+        Diagnóstico baseado nas informações fornecidas pelo cliente.<br>
+        Não constitui recomendação de investimento.<br>
+        <button class="btn-imprimir" onclick="window.print()">⎙ Salvar / Imprimir</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<script>
+// ── ESTADO ──
+const respostas = {};
+let secaoAtual = 0;
+
+// ── MÁSCARA ──
+function mascara(el) {
+  let v = el.value.replace(/\D/g,'');
+  if(!v) { el.value=''; return; }
+  v = (parseInt(v)/100).toFixed(2);
+  v = v.replace('.',',').replace(/\B(?=(\d{3})+(?!\d))/g,'.');
+  el.value = 'R$ ' + v;
+}
+function parseBR(s) {
+  if(!s) return 0;
+  return parseFloat(s.replace(/[R$\s.]/g,'').replace(',','.')) || 0;
+}
+function fmt(n) {
+  return 'R$ ' + n.toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2});
+}
+
+// ── OPÇÕES ──
+function selOpcao(qid, idx, texto, pts) {
+  respostas[qid] = { idx, texto, pts };
+  const wrap = document.getElementById(qid);
+  wrap.querySelectorAll('.opcao').forEach((el,i) => {
+    el.classList.toggle('sel', i === idx);
+  });
+  const err = document.getElementById('err-' + qid);
+  if(err) err.classList.remove('visivel');
+}
+
+// ── NAVEGAÇÃO ──
+function mostrarSecao(n) {
+  document.querySelectorAll('.form-secao').forEach(s => s.classList.remove('ativa'));
+  document.getElementById('sec-' + n).classList.add('ativa');
+  secaoAtual = n;
+  // Progresso
+  for(let i=1; i<=4; i++) {
+    const el = document.getElementById('prog-' + i);
+    if(!el) continue;
+    el.classList.remove('ativa','concluida');
+    if(i < n) el.classList.add('concluida');
+    else if(i === n) el.classList.add('ativa');
+  }
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function avancar(sec) {
+  if(sec === 0) {
+    mostrarSecao(1);
+    return;
+  }
+  if(sec === 1) {
+    let ok = true;
+    if(!parseBR(document.getElementById('q1').value)) { document.getElementById('err-q1').classList.add('visivel'); ok=false; }
+    if(!parseBR(document.getElementById('q2').value)) { document.getElementById('err-q2').classList.add('visivel'); ok=false; }
+    if(!parseBR(document.getElementById('q3').value)) { document.getElementById('err-q3').classList.add('visivel'); ok=false; }
+    if(!document.getElementById('q4').value) { document.getElementById('err-q4').classList.add('visivel'); ok=false; }
+    if(!ok) return;
+    mostrarSecao(2);
+    return;
+  }
+  if(sec === 2) {
+    let ok = true;
+    ['q5','q6','q7','q8'].forEach(q => {
+      if(respostas[q] === undefined) { document.getElementById('err-'+q).classList.add('visivel'); ok=false; }
+    });
+    if(!ok) return;
+    mostrarSecao(3);
+    return;
+  }
+}
+
+function voltar(sec) {
+  mostrarSecao(sec - 1);
+}
+
+// ── CÁLCULO ──
+function gerarRelatorio() {
+  // Validar seção 3
+  let ok = true;
+  ['q9','q10','q11','q12'].forEach(q => {
+    if(respostas[q] === undefined) { document.getElementById('err-'+q).classList.add('visivel'); ok=false; }
+  });
+  if(!ok) return;
+
+  // Dados numéricos
+  const nome   = document.getElementById('campo-nome').value.trim() || 'Cliente';
+  const custo  = parseBR(document.getElementById('q1').value);
+  const patrim = parseBR(document.getElementById('q2').value);
+  const aporte = parseBR(document.getElementById('q3').value);
+  const anos   = parseFloat(document.getElementById('q4').value) || 0;
+
+  // RNI
+  const rni  = (custo * 12) / 0.04;
+  const gap  = Math.max(0, rni - patrim);
+  const pct  = Math.min(100, Math.round((patrim / rni) * 100));
+
+  // Projeção
+  let proj = patrim;
+  if(aporte > 0 && anos > 0) {
+    const taxa = 0.05/12, n = anos*12;
+    proj = aporte*((Math.pow(1+taxa,n)-1)/taxa) + patrim*Math.pow(1.05, anos);
+  }
+
+  // ── PILAR 1: CAPITAL (0–100) ──
+  // Baseado em % da RNI atingida e viabilidade da projeção
+  let p1 = pct; // % do patrimônio atual vs RNI
+  if(proj >= rni && anos > 0) p1 = Math.max(p1, 65); // projeção viável
+  p1 = Math.min(100, Math.round(p1));
+
+  // ── PILAR 2: SUSTENTAÇÃO (0–100) ──
+  // Média ponderada das 4 respostas qualitativas
+  const s5  = respostas['q5']?.pts  ?? 0; // desacumulação
+  const s6  = respostas['q6']?.pts  ?? 0; // plano saúde
+  const s7  = respostas['q7']?.pts  ?? 0; // projeção saúde
+  const s8  = respostas['q8']?.pts  ?? 0; // reserva médica
+  const p2  = Math.round((s5*0.35 + s6*0.25 + s7*0.2 + s8*0.2));
+
+  // ── PILAR 3: LEGADO (0–100) ──
+  const s9  = respostas['q9']?.pts  ?? 0;
+  const s10 = respostas['q10']?.pts ?? 0;
+  const s11 = respostas['q11']?.pts ?? 0;
+  const s12 = respostas['q12']?.pts ?? 0;
+  const p3  = Math.round((s9*0.3 + s10*0.2 + s11*0.3 + s12*0.2));
+
+  // ── ÍNDICE VIDA ponderado ──
+  const indice = Math.round(p1*0.40 + p2*0.40 + p3*0.20);
+
+  // Status
+  let status;
+  if(indice <= 25)      status = 'Estrutura crítica';
+  else if(indice <= 45) status = 'Vulnerabilidade estrutural';
+  else if(indice <= 65) status = 'Base construída — com falhas importantes';
+  else if(indice <= 80) status = 'Estrutura sólida';
+  else                  status = 'Estrutura de referência';
+
+  // ── RISCOS ──
+  const riscos = [];
+  if(p1 < 50) riscos.push('Patrimônio atual representa menos de 50% da reserva necessária para a independência');
+  if(s5 < 50) riscos.push('Desacumulação não estruturada — sem modelo definido de retirada do patrimônio');
+  if(s6 < 50 || s7 < 50) riscos.push('Custo futuro de saúde subestimado — risco crescente a partir dos 65 anos');
+  if(s8 < 50) riscos.push('Ausência de reserva médica específica para cuidados de longa duração');
+  if(s9 < 50) riscos.push('Previdência privada ausente ou não revisada — potencial perda de eficiência fiscal');
+  if(s11 < 50) riscos.push('Legado sem planejamento formal — risco de inventário oneroso e conflito entre herdeiros');
+  if(s12 < 50) riscos.push('Estrutura de transmissão patrimonial não definida — exposição ao ITCMD');
+  if(riscos.length === 0) riscos.push('Nenhum risco crítico identificado nas dimensões avaliadas.');
+
+  // ── PRIORIDADES ──
+  const prios = [];
+  const scorePilares = [{p:p1,nome:'Capital'},{p:p2,nome:'Sustentação'},{p:p3,nome:'Legado'}]
+    .sort((a,b) => a.p - b.p);
+
+  const prioMap = {
+    'Capital': 'Construir e acelerar o capital financeiro para reduzir o gap de ' + fmt(gap),
+    'Sustentação': 'Estruturar modelo de desacumulação e projetar custos de saúde da terceira fase',
+    'Legado': 'Organizar testamento, revisar previdência e definir estrutura de transmissão patrimonial',
+  };
+  scorePilares.forEach(sp => prios.push(prioMap[sp.nome]));
+
+  // ── PREVISÃO TEMPORAL — a data que dói ──
+  let previsaoFrase;
+  if(patrim >= rni) {
+    previsaoFrase = 'Patrimônio atual já supera a RNI. O foco agora é preservar, desacumular com eficiência e estruturar o legado.';
+  } else {
+    // Calcula anos reais por iteração
+    let anosReais = null;
+    if(aporte > 0) {
+      const taxa = 0.05/12;
+      for(let t=1; t<=60; t++) {
+        const n = t*12;
+        const v = aporte*((Math.pow(1+taxa,n)-1)/taxa) + patrim*Math.pow(1.05,t);
+        if(v >= rni) { anosReais = t; break; }
+      }
+    }
+    if(anos > 0 && anosReais && anosReais <= anos) {
+      previsaoFrase = `No ritmo atual, você atingirá a independência financeira dentro dos ${anos} anos previstos. A execução precisa ser consistente.`;
+    } else if(anos > 0 && anosReais && anosReais > anos) {
+      const excesso = anosReais - anos;
+      previsaoFrase = `No ritmo atual, a independência seria atingida em ${anosReais} anos — ${excesso} ${excesso===1?'ano':'anos'} além do prazo desejado de ${anos} anos.`;
+    } else if(anos > 0 && !anosReais && aporte > 0) {
+      previsaoFrase = `No ritmo atual, os aportes não são suficientes para atingir a independência no prazo desejado de ${anos} anos.`;
+    } else if(anosReais) {
+      previsaoFrase = `No ritmo atual, você levará aproximadamente ${anosReais} anos para atingir a independência financeira.`;
+    } else if(aporte > 0) {
+      previsaoFrase = 'Os aportes atuais não são suficientes para atingir a independência financeira em até 60 anos. O plano precisa ser revisto.';
+    } else {
+      previsaoFrase = 'Informe seus aportes mensais para calcular a previsão de independência.';
+    }
+  }
+
+  // ── OFERTA ORIENTADA AO GAP ──
+  const proximoTitulo = gap > 0
+    ? `Como reduzir o gap de ${fmt(gap)} da forma mais eficiente possível?`
+    : 'Como preservar e otimizar o patrimônio que você construiu?';
+
+  // ── WPP ──
+  const msg = `Olá, Ivan. Acabo de concluir meu Relatório VIDA Aposentadoria. Índice VIDA: ${indice}/100. RNI necessária: ${fmt(rni)}. Gap atual: ${gap>0?fmt(gap):'Atingida'}. Gostaria de conversar sobre o próximo passo.`;
+
+  // ── PREENCHER RELATÓRIO ──
+  document.getElementById('rel-nome').textContent = nome;
+  document.getElementById('rel-data').innerHTML = new Date().toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'}) + '<br>Diagnóstico VIDA Aposentadoria';
+
+  // Gap hero
+  const ghv = document.getElementById('rel-gap-hero-valor');
+  if(gap <= 0) {
+    ghv.textContent = 'Independência atingida';
+    ghv.style.color = '#7dc';
+    ghv.style.fontSize = '3rem';
+    document.querySelector('.rel-gap-hero-faltam').textContent = '';
+    document.querySelector('.rel-gap-hero-eyebrow').textContent = 'Resultado do diagnóstico patrimonial';
+  } else {
+    ghv.textContent = fmt(gap);
+  }
+
+  // Três sub-números
+  document.getElementById('rel-custo-mensal').textContent = fmt(custo);
+  document.getElementById('rel-rni').textContent   = fmt(rni);
+  document.getElementById('rel-patrim').textContent = fmt(patrim);
+
+  // Cenário
+  document.getElementById('rel-previsao').textContent = previsaoFrase;
+
+  // Índice VIDA
+  document.getElementById('rel-indice-num').textContent    = indice;
+  document.getElementById('rel-indice-status').textContent = status;
+  document.getElementById('rp1').textContent = p1;
+  document.getElementById('rp2').textContent = p2;
+  document.getElementById('rp3').textContent = p3;
+
+  // Riscos e prioridades
+  const rlista = document.getElementById('rel-riscos-lista');
+  rlista.innerHTML = riscos.slice(0,4).map(r =>
+    `<div class="rel-risco"><div class="rel-risco-icone">▲</div><div class="rel-risco-texto">${r}</div></div>`
+  ).join('');
+
+  const plista = document.getElementById('rel-prio-lista');
+  plista.innerHTML = prios.map((p,i) =>
+    `<div class="rel-prio"><div class="rel-prio-num">${i+1}</div><div class="rel-prio-texto">${p}</div></div>`
+  ).join('');
+
+  // Próximo passo
+  document.getElementById('rel-proximo-titulo').textContent = proximoTitulo;
+  document.getElementById('btn-wpp').href = 'https://wa.me/5511979530555?text=' + encodeURIComponent(msg);
+
+  // Mostrar relatório
+  document.getElementById('tela-form').style.display = 'none';
+  const tel = document.getElementById('tela-relatorio');
+  tel.classList.add('visivel');
+  window.scrollTo({top:0});
+
+  // Disparar barras após render (pequeno delay para CSS transition funcionar)
+  setTimeout(() => {
+    document.getElementById('rel-barra').style.width  = indice + '%';
+    document.getElementById('rpb1').style.width = p1 + '%';
+    document.getElementById('rpb2').style.width = p2 + '%';
+    document.getElementById('rpb3').style.width = p3 + '%';
+  }, 120);
+}
+</script>
+
+</body>
+</html>
