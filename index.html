@@ -31,7 +31,6 @@ header p{max-width:760px;margin:auto;font-size:17px}.wrap{max-width:800px;margin
 <div class="field"><label for="nome">Nome</label><input id="nome" autocomplete="name"></div>
 <div class="field"><label for="wpp">WhatsApp</label><input id="wpp" autocomplete="tel"></div>
 <div class="field"><label for="email">E-mail (opcional)</label><input id="email" type="email" autocomplete="email"></div>
-
 <label class="consent"><input id="cd" type="checkbox"><span>Autorizo o tratamento dos dados e respostas para gerar este resultado e permitir contato relacionado a este Scanner. Posso solicitar acesso, correção ou exclusão pelo e-mail ivan@ivanviannafinancas.com.br. <strong>Obrigatório.</strong></span></label>
 <label class="consent"><input id="cm" type="checkbox"><span>Também quero receber conteúdos do Método VIDA™ por e-mail ou WhatsApp. <strong>Opcional.</strong></span></label>
 <p id="err" class="note hidden" style="color:#8a2f2f">Preencha os campos obrigatórios e aceite o tratamento necessário.</p>
@@ -39,130 +38,22 @@ header p{max-width:760px;margin:auto;font-size:17px}.wrap{max-width:800px;margin
 <div id="result" class="box hidden"><div class="tag">LEITURA INICIAL · AUTOAVALIAÇÃO</div><h2 id="title"></h2>
 <div id="scoreWrap" class="score"><span id="score"></span><small style="font-size:18px">/100</small></div><p class="small"><strong>Índice orientativo:</strong> organiza apenas as respostas deste Scanner. Não representa percentual de independência, proteção, risco ou probabilidade de evento.</p>
 <p id="text"></p><div id="metrics"></div><h3>Sinais para observar</h3><ul id="signals" class="signals"></ul><p id="resultNote">O resultado pode servir para organizar perguntas e decidir se vale estudar o tema, realizar cálculos completos ou buscar análise profissional.</p>
-<a id="cta" class="btn primary" target="_blank" rel="noopener">Conversar sobre o resultado</a>
+<a id="cta" class="btn primary" target="_blank" rel="noopener">Entender se preciso aprofundar esta questão</a>
 <p class="disclaimer">Este Scanner é uma ferramenta educativa de autoavaliação. O resultado reflete apenas as respostas informadas e não constitui diagnóstico profissional, recomendação de investimento, parecer jurídico, contábil ou tributário, nem substitui planejamento individualizado.</p></div>
 </main>
 <footer>Ivan Vianna · CFP® · Planejador financeiro · Arquiteto de patrimônio · ivanviannafinancas.com.br</footer>
 <script>
-const CONFIG={"mode": "ind", "publicName": "Scanner de Independência Financeira VIDA™", "meta": "Autoavaliação inicial sobre independência financeira.", "desc": "Quanto da sua vida financeira ainda depende do seu trabalho ativo? Uma leitura inicial sobre reservas, renda independente do trabalho, acumulação e clareza do caminho para a independência financeira.", "emailRequired": false};
-const Q=[{"t": "Se você parasse de trabalhar amanhã, por quanto tempo seu padrão de vida atual poderia ser mantido com os recursos disponíveis?", "s": "Considere reservas, investimentos e outras fontes de recursos.", "o": [["Menos de 3 meses", 0], ["Entre 3 e 12 meses", 1], ["Entre 1 e 5 anos", 2], ["Mais de 5 anos", 3]]}, {"t": "Qual parcela da sua renda mensal vem de fontes que não dependem diretamente do seu trabalho ativo?", "s": "Ex.: aluguéis, dividendos, juros, distribuições e outras rendas patrimoniais.", "o": [["Nenhuma ou quase nenhuma", 0], ["Menos de 20%", 1], ["Entre 20% e 60%", 2], ["Mais de 60%", 3]]}, {"t": "Você possui uma estimativa documentada do patrimônio necessário para sustentar seu padrão de vida sem depender do trabalho?", "s": "Aqui importa a existência de cálculo e premissas, não apenas percepção subjetiva.", "o": [["Nunca calculei", 0], ["Tenho uma noção aproximada", 1], ["Já fiz uma estimativa", 2], ["Tenho cálculo, premissas e revisão periódica", 3]]}, {"t": "Seu planejamento considera um período prolongado de redução ou interrupção de renda?", "s": "Ex.: doença, desemprego, queda de faturamento ou outra transição relevante.", "o": [["Não considerei esse cenário", 0], ["Tenho alguma reserva, mas sem teste de cenário", 1], ["Considerei e aceitaria ajustes importantes", 2], ["Tenho reservas, liquidez e cenários explicitamente planejados", 3]]}, {"t": "Qual afirmação descreve melhor o principal desafio atual para sua independência financeira?", "s": "Escolha a alternativa mais próxima da sua realidade.", "o": [["Ainda não formei uma reserva adequada", 0], ["Há concentração patrimonial ou baixa liquidez", 1], ["Consigo acumular, mas o ritmo ou o método ainda é incerto", 2], ["Estou mais próximo da autonomia e preciso revisar longevidade, retirada e preservação", 3]]}, {"t": "Sua construção patrimonial acontece com metas, aportes e revisões definidos?", "s": "A pergunta é sobre processo, não sobre rentabilidade passada.", "o": [["Não há processo definido", 0], ["Há alguma organização, mas sem rotina consistente", 1], ["Há processo, mas ainda irregular", 2], ["Há metas, aportes e revisão periódica documentados", 3]]}];
+const CONFIG={"mode":"ind","publicName":"Scanner de Independência Financeira VIDA™","meta":"Autoavaliação inicial sobre independência financeira.","desc":"Quanto da sua vida financeira ainda depende do seu trabalho ativo? Uma leitura inicial sobre reservas, renda independente do trabalho, acumulação e clareza do caminho para a independência financeira.","emailRequired":false};
+const Q=[{"t":"Se você parasse de trabalhar amanhã, por quanto tempo seu padrão de vida atual poderia ser mantido com os recursos disponíveis?","s":"Considere reservas, investimentos e outras fontes de recursos.","o":[["Menos de 3 meses",0],["Entre 3 e 12 meses",1],["Entre 1 e 5 anos",2],["Mais de 5 anos",3]]},{"t":"Qual parcela da sua renda mensal vem de fontes que não dependem diretamente do seu trabalho ativo?","s":"Ex.: aluguéis, dividendos, juros, distribuições e outras rendas patrimoniais.","o":[["Nenhuma ou quase nenhuma",0],["Menos de 20%",1],["Entre 20% e 60%",2],["Mais de 60%",3]]},{"t":"Você possui uma estimativa documentada do patrimônio necessário para sustentar seu padrão de vida sem depender do trabalho?","s":"Aqui importa a existência de cálculo e premissas, não apenas percepção subjetiva.","o":[["Nunca calculei",0],["Tenho uma noção aproximada",1],["Já fiz uma estimativa",2],["Tenho cálculo, premissas e revisão periódica",3]]},{"t":"Seu planejamento considera um período prolongado de redução ou interrupção de renda?","s":"Ex.: doença, desemprego, queda de faturamento ou outra transição relevante.","o":[["Não considerei esse cenário",0],["Tenho alguma reserva, mas sem teste de cenário",1],["Considerei e aceitaria ajustes importantes",2],["Tenho reservas, liquidez e cenários explicitamente planejados",3]]},{"t":"Qual afirmação descreve melhor o principal desafio atual para sua independência financeira?","s":"Escolha a alternativa mais próxima da sua realidade.","o":[["Ainda não formei uma reserva adequada",0],["Há concentração patrimonial ou baixa liquidez",1],["Consigo acumular, mas o ritmo ou o método ainda é incerto",2],["Estou mais próximo da autonomia e preciso revisar longevidade, retirada e preservação",3]]},{"t":"Sua construção patrimonial acontece com metas, aportes e revisões definidos?","s":"A pergunta é sobre processo, não sobre rentabilidade passada.","o":[["Não há processo definido",0],["Há alguma organização, mas sem rotina consistente",1],["Há processo, mas ainda irregular",2],["Há metas, aportes e revisão periódica documentados",3]]}];
 const WEBHOOK="https://script.google.com/macros/s/AKfycbzsVpO_OoWVjENJyDP2MCY-wGNqSnuz1oc6txaATRksQNRJCwrOaJaK1Gzv2bQQI0I/exec";
-function criarEventIdVIDA(){
-  try{if(window.crypto&&crypto.randomUUID)return crypto.randomUUID();}catch(_){}
-  return 'evt-'+Date.now()+'-'+Math.random().toString(16).slice(2);
-}
-function enviarCapturaCanonicaVIDA(sheet,dados){
-  try{
-    const payload=Object.assign({
-      capture_type:'scanner_canonico_v0.3',
-      sheet:sheet,
-      event_id:criarEventIdVIDA(),
-      hp:''
-    },dados);
-    fetch(WEBHOOK,{
-      method:'POST',
-      mode:'no-cors',
-      keepalive:true,
-      headers:{'Content-Type':'text/plain;charset=UTF-8'},
-      body:JSON.stringify(payload)
-    }).catch(()=>{});
-  }catch(_){}
-}
-
-const WPP="5511979530555";
-let cur=0,a=Array(Q.length).fill(null);
-function render(){
-  const q=Q[cur];
-  pos.textContent=`Pergunta ${cur+1} de ${Q.length}`;
-  fill.style.width=`${(cur/Q.length)*100}%`;
-  host.innerHTML=`<div class="q">${q.dn?`<div class="dim">${q.dn}</div>`:''}<h2>${q.t}</h2>${q.s?`<p class="sub">${q.s}</p>`:''}<div class="opts">${q.o.map((o,i)=>`<button class="opt ${a[cur]===i?'sel':''}" onclick="pick(${i})">${o[0]}</button>`).join('')}</div><div class="actions"><button class="btn secondary" onclick="back()" ${cur===0?'disabled':''}>← Voltar</button><button class="btn primary" onclick="next()" ${a[cur]===null?'disabled':''}>${cur===Q.length-1?'Calcular leitura':'Continuar →'}</button></div></div>`;
-}
-function pick(i){a[cur]=i;render()}
-function back(){if(cur>0){cur--;render()}}
-function next(){if(a[cur]===null)return;if(cur<Q.length-1){cur++;render()}else{quiz.classList.add('hidden');capture.classList.remove('hidden')}}
-function phone(v){const d=(v||'').replace(/\D/g,'');return d.length===10||d.length===11}
-function mail(v){return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test((v||'').trim())}
+function criarEventIdVIDA(){try{if(window.crypto&&crypto.randomUUID)return crypto.randomUUID();}catch(_){}return 'evt-'+Date.now()+'-'+Math.random().toString(16).slice(2)}
+function enviarCapturaCanonicaVIDA(sheet,dados){try{const payload=Object.assign({capture_type:'scanner_canonico_v0.3',sheet:sheet,event_id:criarEventIdVIDA(),hp:''},dados);fetch(WEBHOOK,{method:'POST',mode:'no-cors',keepalive:true,headers:{'Content-Type':'text/plain;charset=UTF-8'},body:JSON.stringify(payload)}).catch(()=>{})}catch(_){}}
+const WPP="5511979530555";let cur=0,a=Array(Q.length).fill(null);
+function render(){const q=Q[cur];pos.textContent=`Pergunta ${cur+1} de ${Q.length}`;fill.style.width=`${(cur/Q.length)*100}%`;host.innerHTML=`<div class="q">${q.dn?`<div class="dim">${q.dn}</div>`:''}<h2>${q.t}</h2>${q.s?`<p class="sub">${q.s}</p>`:''}<div class="opts">${q.o.map((o,i)=>`<button class="opt ${a[cur]===i?'sel':''}" onclick="pick(${i})">${o[0]}</button>`).join('')}</div><div class="actions"><button class="btn secondary" onclick="back()" ${cur===0?'disabled':''}>← Voltar</button><button class="btn primary" onclick="next()" ${a[cur]===null?'disabled':''}>${cur===Q.length-1?'Calcular leitura':'Continuar →'}</button></div></div>`}
+function pick(i){a[cur]=i;render()}function back(){if(cur>0){cur--;render()}}function next(){if(a[cur]===null)return;if(cur<Q.length-1){cur++;render()}else{quiz.classList.add('hidden');capture.classList.remove('hidden')}}
+function phone(v){const d=(v||'').replace(/\D/g,'');return d.length===10||d.length===11}function mail(v){return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test((v||'').trim())}
 function calcScore(){return Math.round(a.reduce((s,x,i)=>s+Q[i].o[x][1],0)/Q.reduce((s,q)=>s+Math.max(...q.o.map(o=>o[1])),0)*100)}
-function analyze(){
-  const sc=calcScore(), sig=[]; let ti='',tx='',metrics='',dims=null;
-  if(CONFIG.mode==='ind'){
-    if(sc<=25){ti='Dependência elevada da renda ativa';tx='As respostas indicam que interrupções de renda e baixa autonomia patrimonial merecem investigação mais detalhada.'}
-    else if(sc<=50){ti='Construção inicial de autonomia';tx='Há elementos de estrutura, mas a independência ainda parece depender significativamente da continuidade do trabalho e da acumulação futura.'}
-    else if(sc<=75){ti='Acumulação em curso';tx='As respostas mostram uma base mais organizada, com pontos que ainda precisam ser quantificados para estimar prazo, sustentabilidade e margem de escolha.'}
-    else{ti='Autonomia financeira mais avançada';tx='As respostas indicam maior capacidade de sustentar escolhas com o patrimônio. A leitura não confirma independência financeira nem substitui projeções formais.'}
-    if(a[0]<=1)sig.push('A reserva declarada para uma interrupção de renda é relativamente curta.');
-    if(a[1]<=1)sig.push('A renda ainda depende majoritariamente do trabalho ativo.');
-    if(a[2]<=1)sig.push('O patrimônio-alvo ainda não está calculado ou documentado.');
-    if(a[3]<=1)sig.push('Cenários prolongados de redução de renda ainda não parecem formalmente testados.');
-    if(a[5]<=1)sig.push('O processo de acumulação ainda tem baixa formalização ou regularidade.');
-  }else if(CONFIG.mode==='adv'){
-    if(sc<=33){ti='Estrutura ainda pouco formalizada';tx='Suas respostas indicam vários temas que ainda dependem de memória, percepção ou validação futura.'}
-    else if(sc<=66){ti='Estrutura parcialmente formalizada';tx='Há elementos de organização, mas algumas áreas ainda parecem depender de revisão documental ou técnica.'}
-    else{ti='Estrutura mais formalizada — com pontos a revisar';tx='As respostas indicam maior organização. Isso não confirma proteção jurídica ou eficiência fiscal; apenas reduz a quantidade de lacunas autodeclaradas.'}
-    if(a[0]<2)sig.push('Separação entre patrimônio pessoal e atividade profissional merece confirmação técnica.');
-    if(a[1]<2)sig.push('A sustentação do padrão de vida durante interrupção profissional ainda não está plenamente quantificada.');
-    if(a[2]<2)sig.push('A interação entre situação financeira pessoal e participação societária merece revisão.');
-    if(a[3]<2)sig.push('Remuneração, distribuição e aspectos tributários parecem demandar revisão multidisciplinar.');
-    if(a[4]<2)sig.push('Eventos de saída, incapacidade ou falecimento de sócios podem precisar de maior formalização.');
-    if(a[5]<2)sig.push('A continuidade informacional para a família ainda pode depender excessivamente de você.');
-  }else{
-    const raw={dep:0,jur:0,fin:0},mx={dep:0,jur:0,fin:0};
-    Q.forEach((q,i)=>{raw[q.d]+=q.o[a[i]][1];mx[q.d]+=Math.max(...q.o.map(o=>o[1]))});
-    const s={dep:Math.round(raw.dep/mx.dep*100),jur:Math.round(raw.jur/mx.jur*100),fin:Math.round(raw.fin/mx.fin*100)};
-    if(sc<=40){ti='Estrutura ainda muito dependente do fundador';tx='As respostas sugerem concentração relevante de decisões, continuidade e informação em poucas pessoas.'}
-    else if(sc<=70){ti='Transição de dependência para estrutura';tx='Há mecanismos de continuidade, mas eles parecem parciais ou pouco testados em algumas dimensões.'}
-    else{ti='Estrutura mais distribuída — com necessidade de revisão';tx='As respostas indicam maior distribuição de processos e mecanismos de continuidade. Isso não confirma prontidão empresarial sem análise documental e financeira.'}
-    if(s.dep<60)sig.push('A operação ainda parece depender fortemente do fundador para decisões, acessos ou processos.');
-    if(s.jur<60)sig.push('Documentos e responsabilidades de continuidade societária merecem revisão formal.');
-    if(s.fin<60)sig.push('Caixa, concentração de receita ou proteção de pessoas-chave merecem quantificação mais detalhada.');
-    metrics=`<div class="result-grid"><div class="metric">Dependência do fundador<strong>${s.dep}%</strong></div><div class="metric">Continuidade societária<strong>${s.jur}%</strong></div><div class="metric">Continuidade financeira<strong>${s.fin}%</strong></div></div>`;dims=s;
-  }
-  if(!sig.length)sig.push('Nenhuma lacuna evidente nas respostas; premissas, documentos e valores ainda devem ser revistos periodicamente.');
-  return {sc,ti,tx,sig,metrics,dims};
-}
-function showResult(){
-  const n=nome.value.trim(),w=wpp.value,e=email.value.trim();
-  if(n.length<2||!phone(w)||!cd.checked||(CONFIG.emailRequired&&!mail(e))){err.classList.remove('hidden');return}
-  const r=analyze();title.textContent=r.ti;score.textContent=r.sc;text.textContent=r.tx;metrics.innerHTML=r.metrics;signals.innerHTML=r.sig.map(x=>`<li>${x}</li>`).join('');
-  cta.href=`https://wa.me/${WPP}?text=${encodeURIComponent(`Olá Ivan. Fiz ${CONFIG.publicName} e minha leitura inicial foi ${r.sc}/100 — ${r.ti}. Gostaria de entender o resultado.`)}`;
-  capture.classList.add('hidden');result.classList.remove('hidden');
-  try{
-    // Captura canônica v0.3: POST isolado interceptado pelo Motor VIDA antes do fluxo genérico.
-    // O payload não expõe dados pessoais na URL e não chama distribuir(), Brevo ou nutrição.
-    const respostasPontos=Q.map((q,i)=>q.o[a[i]][1]);
-    const common={
-      instrumento:CONFIG.publicName,
-      nome:n,
-      whatsapp:w.replace(/\D/g,''),
-      email:e,
-      score:String(r.sc),
-      faixa:r.ti,
-      respostas_json:JSON.stringify(respostasPontos),
-      consentimento_dados:'sim',
-      consentimento_marketing:cm.checked?'sim':'nao',
-      consent_term_version:'2026-09-14-v1',
-      versao:'candidato-v0.3',
-      origem:'scanner-web'
-    };
-    let sheet, extra={};
-    if(CONFIG.mode==='ind'){
-      sheet='Scanner_IF_VIDA';
-    }else if(CONFIG.mode==='emp'){
-      sheet='Scanner_Empresa_VIDA';
-      const d=r.dims||{dep:0,jur:0,fin:0};
-      extra={faturamento:document.getElementById('fat').value||'',dependencia_fundador:String(d.dep),continuidade_societaria:String(d.jur),continuidade_financeira:String(d.fin)};
-    }else{
-      sheet='Scanner_Advogados_VIDA';
-      const pts=respostasPontos;
-      extra={
-        patrimonio_pessoal:String(Math.round(((pts[0]+pts[1])/4)*100)),
-        escritorio:String(Math.round(((pts[2]+pts[3])/4)*100)),
-        socios:String(Math.round((pts[4]/2)*100)),
-        familia:String(Math.round((pts[5]/2)*100))
-      };
-    }
-    enviarCapturaCanonicaVIDA(sheet,Object.assign({},common,extra));
-  }catch(_){}
-}
+function analyze(){const sc=calcScore(),sig=[];let ti='',tx='',metrics='',dims=null;if(CONFIG.mode==='ind'){if(sc<=25){ti='Dependência elevada da renda ativa';tx='As respostas indicam que interrupções de renda e baixa autonomia patrimonial merecem investigação mais detalhada.'}else if(sc<=50){ti='Construção inicial de autonomia';tx='Há elementos de estrutura, mas a independência ainda parece depender significativamente da continuidade do trabalho e da acumulação futura.'}else if(sc<=75){ti='Acumulação em curso';tx='As respostas mostram uma base mais organizada, com pontos que ainda precisam ser quantificados para estimar prazo, sustentabilidade e margem de escolha.'}else{ti='Autonomia financeira mais avançada';tx='As respostas indicam maior capacidade de sustentar escolhas com o patrimônio. A leitura não confirma independência financeira nem substitui projeções formais.'}if(a[0]<=1)sig.push('A reserva declarada para uma interrupção de renda é relativamente curta.');if(a[1]<=1)sig.push('A renda ainda depende majoritariamente do trabalho ativo.');if(a[2]<=1)sig.push('O patrimônio-alvo ainda não está calculado ou documentado.');if(a[3]<=1)sig.push('Cenários prolongados de redução de renda ainda não parecem formalmente testados.');if(a[5]<=1)sig.push('O processo de acumulação ainda tem baixa formalização ou regularidade.')}if(!sig.length)sig.push('Nenhuma lacuna evidente nas respostas; premissas, documentos e valores ainda devem ser revistos periodicamente.');return {sc,ti,tx,sig,metrics,dims}}
+function showResult(){const n=nome.value.trim(),w=wpp.value,e=email.value.trim();if(n.length<2||!phone(w)||!cd.checked||(CONFIG.emailRequired&&!mail(e))){err.classList.remove('hidden');return}const r=analyze();title.textContent=r.ti;score.textContent=r.sc;text.textContent=r.tx;metrics.innerHTML=r.metrics;signals.innerHTML=r.sig.map(x=>`<li>${x}</li>`).join('');cta.href=`https://wa.me/${WPP}?text=${encodeURIComponent(`Olá Ivan. Fiz ${CONFIG.publicName}. Gostaria de entender se preciso aprofundar esta questão.`)}`;capture.classList.add('hidden');result.classList.remove('hidden');try{const respostasPontos=Q.map((q,i)=>q.o[a[i]][1]);const common={instrumento:CONFIG.publicName,nome:n,whatsapp:w.replace(/\D/g,''),email:e,score:String(r.sc),faixa:r.ti,respostas_json:JSON.stringify(respostasPontos),consentimento_dados:'sim',consentimento_marketing:cm.checked?'sim':'nao',consent_term_version:'2026-09-14-v1',versao:'v0.3-public',origem:'scanner-web'};enviarCapturaCanonicaVIDA('Scanner_IF_VIDA',common)}catch(_){}}
 render();
 </script></body></html>
